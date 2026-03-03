@@ -1,0 +1,536 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 245 35% 96%;
+    --foreground: 230 25% 12%;
+    --card: 0 0% 100%;
+    --card-foreground: 230 24% 12%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 230 24% 12%;
+    --primary: 228 80% 70%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 270 60% 70%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 240 20% 93%;
+    --muted-foreground: 230 15% 42%;
+    --accent: 340 65% 75%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 60% 55%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 240 25% 90%;
+    --input: 240 20% 93%;
+    --ring: 228 80% 70%;
+    --radius: 1.25rem;
+
+    --creator: 11 85% 62%;
+    --fixer: 228 75% 62%;
+    --connector: 43 80% 55%;
+    --competitor: 340 65% 65%;
+    --xp: 38 85% 50%;
+    --xp-gold: 43 80% 55%;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 228 80% 70%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 228 80% 70%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  html, body, #root {
+    height: 100%;
+    overflow: hidden;
+  }
+}
+
+/* ═══ SAFE AREA UTILITIES ═══ */
+.pt-safe {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.mt-safe {
+  margin-top: env(safe-area-inset-top, 0px);
+}
+.top-safe {
+  top: env(safe-area-inset-top, 0px);
+}
+
+/* ═══ MESH GRADIENT BACKGROUND ═══ */
+.mesh-bg {
+  min-height: 100vh;
+  min-height: 100dvh;
+  background:
+    radial-gradient(ellipse at 10% 40%, hsl(270 50% 85% / 0.55) 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 10%, hsl(215 60% 85% / 0.6) 0%, transparent 50%),
+    radial-gradient(ellipse at 30% 90%, hsl(335 50% 90% / 0.45) 0%, transparent 45%),
+    radial-gradient(ellipse at 80% 70%, hsl(245 50% 88% / 0.35) 0%, transparent 40%),
+    radial-gradient(ellipse at 50% 25%, hsl(195 40% 90% / 0.3) 0%, transparent 35%),
+    radial-gradient(ellipse at 60% 55%, hsl(20 50% 92% / 0.2) 0%, transparent 30%),
+    hsl(var(--background));
+}
+
+/* ═══ BENTO CARDS ═══ */
+.bento-card {
+  background: hsl(0 0% 100% / 0.5);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid hsl(0 0% 100% / 0.65);
+  border-radius: 1.25rem;
+  box-shadow:
+    0 8px 32px hsl(240 60% 60% / 0.06),
+    0 1px 0 hsl(0 0% 100% / 0.4) inset;
+}
+
+.bento-card-strong {
+  background: hsl(0 0% 100% / 0.65);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border: 1px solid hsl(0 0% 100% / 0.75);
+  border-radius: 1.25rem;
+  box-shadow:
+    0 12px 40px hsl(240 60% 60% / 0.08),
+    0 1px 0 hsl(0 0% 100% / 0.5) inset;
+}
+
+/* ═══ GLASS CARDS ═══ */
+.glass {
+  background: hsl(0 0% 100% / 0.45);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid hsl(0 0% 100% / 0.55);
+}
+
+.glass-card {
+  background: hsl(0 0% 100% / 0.4);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid hsl(0 0% 100% / 0.5);
+  box-shadow: 0 15px 40px hsl(228 80% 70% / 0.12);
+}
+
+/* ═══ PREMIUM BUTTON ═══ */
+.btn-premium {
+  background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
+  color: white;
+  border-radius: 28px;
+  box-shadow: 0 12px 30px hsl(228 80% 70% / 0.25);
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease, transform 0.15s ease;
+}
+.btn-premium::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(to bottom, hsl(0 0% 100% / 0.2), transparent);
+  pointer-events: none;
+  border-radius: 28px 28px 0 0;
+}
+
+/* ═══ GRADIENT TEXT ═══ */
+.gradient-text {
+  background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Leaflet overrides */
+.leaflet-container {
+  background: hsl(245 35% 96%) !important;
+  font-family: inherit !important;
+}
+.leaflet-control-attribution {
+  display: none !important;
+}
+.leaflet-control-zoom {
+  display: none !important;
+}
+
+/* Player marker */
+.player-marker {
+  background: none !important;
+  border: none !important;
+}
+.player-marker-inner {
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid var(--ring-color, hsl(var(--primary)));
+  box-shadow: 0 0 16px var(--ring-color, hsl(var(--primary)) / 0.4);
+}
+.player-marker-inner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.player-marker-pulse {
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 2px solid var(--ring-color, hsl(var(--primary)));
+  opacity: 0;
+  animation: marker-pulse 2s ease-out infinite;
+}
+
+/* Player marker label */
+.player-marker-label {
+  margin-top: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  color: hsl(230 25% 12%);
+  background: white;
+  padding: 1px 8px;
+  border-radius: 8px;
+  white-space: nowrap;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+}
+
+/* NPC marker */
+.npc-marker-inner {
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid var(--ring-color);
+  box-shadow: 0 0 12px var(--ring-color, hsl(var(--primary)) / 0.3);
+  position: relative;
+}
+.npc-marker-inner::after {
+  content: '';
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  font-size: 14px;
+}
+.npc-marker-inner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.npc-marker-role {
+  margin-top: 3px;
+  font-size: 10px;
+  font-weight: 700;
+  color: hsl(270 60% 50%);
+  background: hsl(0 0% 100% / 0.9);
+  padding: 1px 7px;
+  border-radius: 6px;
+  white-space: nowrap;
+  text-align: center;
+  border: 1px solid hsl(270 60% 80% / 0.4);
+}
+
+/* POI / Third Place markers */
+.poi-marker {
+  background: none !important;
+  border: none !important;
+}
+.poi-marker-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  filter: drop-shadow(0 3px 10px rgba(0,0,0,0.12));
+}
+.poi-marker-thumb {
+  width: 56px;
+  height: 40px;
+  border-radius: 10px;
+  background-size: cover;
+  background-position: center;
+  border: 2.5px solid white;
+  position: relative;
+  overflow: hidden;
+}
+.poi-marker-locked {
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+.poi-marker-label {
+  margin-top: 3px;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 6px;
+  white-space: nowrap;
+  text-align: center;
+}
+.poi-marker-label.poi-unlocked {
+  color: hsl(230 25% 12%);
+  background: white;
+  border: 1px solid transparent;
+}
+.poi-marker-label.poi-locked {
+  color: hsl(230 15% 55%);
+  background: hsl(240 20% 95% / 0.9);
+  border: 1px solid hsl(240 20% 88%);
+}
+
+/* Quest marker */
+.quest-marker {
+  background: none !important;
+  border: none !important;
+}
+.quest-marker-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  filter: drop-shadow(0 4px 14px rgba(0,0,0,0.12));
+}
+.quest-marker-thumb {
+  width: 100%;
+  border-radius: 12px;
+  background-size: cover;
+  background-position: center;
+  border: 2.5px solid white;
+  position: relative;
+  overflow: hidden;
+}
+.quest-marker-icon {
+  position: absolute;
+  top: -10px;
+  right: -8px;
+  font-size: 26px;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+  z-index: 5;
+  line-height: 1;
+}
+.quest-marker-icon-new {
+  animation: quest-icon-bounce 1.5s ease-in-out infinite;
+}
+.quest-marker-icon-ongoing {
+  filter: grayscale(0.3) drop-shadow(0 2px 4px rgba(0,0,0,0.15));
+}
+.quest-marker-lock {
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+.quest-marker-badge {
+  margin-top: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  color: white;
+  padding: 2px 10px;
+  border-radius: 8px;
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+}
+.quest-marker-badge-locked {
+  background: hsl(230 15% 75%) !important;
+  color: hsl(230 15% 45%);
+}
+.quest-marker-locked .quest-marker-thumb {
+  border-color: hsl(240 20% 88%);
+  filter: grayscale(0.5) brightness(0.9);
+}
+.quest-marker-pulse-ring {
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 60px;
+  border-radius: 16px;
+  border: 2px solid var(--quest-color, hsl(var(--primary)));
+  opacity: 0;
+  animation: quest-card-pulse 2s ease-out infinite;
+  pointer-events: none;
+}
+
+/* Radar animation */
+.radar-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid hsl(var(--primary) / 0.5);
+  animation: radar-expand 2s ease-out infinite;
+}
+.radar-ring:nth-child(2) { animation-delay: 0.5s; }
+.radar-ring:nth-child(3) { animation-delay: 1s; }
+
+@keyframes marker-pulse {
+  0% { transform: scale(1); opacity: 0.5; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+@keyframes quest-card-pulse {
+  0% { transform: translateX(-50%) scale(0.9); opacity: 0.5; }
+  100% { transform: translateX(-50%) scale(1.4); opacity: 0; }
+}
+@keyframes quest-icon-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+@keyframes radar-expand {
+  0% { width: 40px; height: 40px; opacity: 0.6; }
+  100% { width: 300px; height: 300px; opacity: 0; }
+}
+@keyframes float-up {
+  0% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-40px); }
+}
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px hsl(228 80% 70% / 0.3); }
+  50% { box-shadow: 0 0 40px hsl(228 80% 70% / 0.5); }
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+.animate-float-up {
+  animation: float-up 1.5s ease-out forwards;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Marker clustering */
+.org-cluster {
+  background: none !important;
+  border: none !important;
+}
+.org-cluster-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: hsl(var(--primary));
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  box-shadow: 0 2px 8px hsl(228 80% 70% / 0.3);
+}
+
+/* Attendee dots on quest markers */
+.quest-marker-attendees {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  margin-top: 2px;
+}
+.quest-attendee-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1px solid white;
+}
+.quest-attendee-count {
+  font-size: 9px;
+  font-weight: 700;
+  color: hsl(230 15% 42%);
+}
+
+/* Partner markers */
+.partner-marker {
+  background: none !important;
+  border: none !important;
+}
+.partner-marker-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: hsl(var(--card));
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  border: 2px solid var(--partner-color, #10b981);
+}
+.partner-marker-card--no-img {
+  padding: 6px 8px 2px;
+}
+.partner-marker-thumb {
+  width: 56px;
+  height: 40px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+.partner-marker-icon-badge {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  font-size: 12px;
+  background: hsl(var(--card));
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+.partner-marker-emoji {
+  font-size: 20px;
+  line-height: 1;
+}
+.partner-marker-label {
+  font-size: 9px;
+  font-weight: 600;
+  padding: 2px 4px;
+  text-align: center;
+  white-space: nowrap;
+  max-width: 70px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: hsl(var(--foreground));
+}
+.partner-marker-sim-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6C8CFF, #22D3EE);
+  color: white;
+  font-size: 8px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 4px rgba(108, 140, 255, 0.4);
+  animation: pulse 2s ease-in-out infinite;
+}
+.partner-marker--sim .partner-marker-card {
+  border-color: #6C8CFF;
+  box-shadow: 0 2px 12px rgba(108, 140, 255, 0.3);
+}
+.partner-marker-card {
+  position: relative;
+}
